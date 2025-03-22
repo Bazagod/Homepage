@@ -1,0 +1,127 @@
+.container {
+  margin-top: 2rem;
+
+  .row {
+    .col-md-8 {
+      .card {
+        margin-bottom: 2rem;
+        border: none;
+
+        .card-img-top {
+          max-height: 350px;
+          border-radius: 0;
+          object-fit: cover;
+          overflow: hidden;
+        }
+
+        .card-body {
+          padding: 2.5rem;
+
+          .row {
+            .col-md-6 {
+              h2.card-title {
+                font-size: 4rem;
+                margin-bottom: 0.5rem;
+                font-family: sans-serif;
+                color: black;
+                font-weight: 900;
+                transform: translateX(-40px);
+              }
+            }
+
+            .col-md-6 {
+              p.card-text {
+                font-size: 1.1rem;
+                line-height: 2;
+                color: #444;
+                font-family: sans-serif;
+                margin-bottom: 2rem;
+              }
+
+              .btn-primary {
+                background-color: #ff362f;
+                border-radius: 0;
+                color: black;
+                border: none !important;
+                padding: 0.6rem 1.8rem;
+                font-size: 1rem;
+                text-decoration: none;
+                transition: background-color 0.3s ease;
+                font-family: sans-serif;
+                margin-bottom: 2rem;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .col-md-4 {
+      .card.bg-dark {
+        background-color: black;
+        color: white;
+        position: relative;
+        border-radius: 0px;
+        top: 0;
+        height: 86%;
+
+        .card-body {
+          padding: 1.5rem;
+
+          h5.card-title {
+            font-size: 3rem;
+            color: orange;
+            margin-bottom: 1.2rem;
+            font-family: sans-serif;
+            font-weight: 900;
+          }
+
+          ul.list-unstyled {
+            display: flex;
+            flex-direction: column;
+            height: 95%;
+            li {
+              margin-bottom: 1rem;
+              border-bottom: 1px solid white;
+              flex-grow: 1;
+
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+
+              a {
+                color: white;
+                text-decoration: none;
+                font-weight: bold;
+                font-size: 1.5rem;
+                font-family: sans-serif;
+
+                &:hover {
+                  color: #007bff;
+                }
+              }
+
+              p {
+                font-size: 1.2rem;
+                margin-top: 0.5rem;
+                line-height: 1.4;
+                color: #ccc;
+              }
+            }
+            li:last-child {
+              border-bottom: none;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .article-previews {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 2rem;
+    row-gap: 2rem;
+    margin-top: 2rem;
+  }
+}

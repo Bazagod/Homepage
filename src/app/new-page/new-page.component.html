@@ -1,0 +1,29 @@
+<header></header>
+
+<main>
+  <div class="container">
+    <h1>New Airlines</h1>
+
+    <div *ngIf="error" class="error-message">
+      <p>Une erreur s'est produite lors de la récupération des données.</p>
+      <p>Message: {{ error.message }}</p>
+      <p>Statut: {{ error.status }}</p>
+      <button (click)="loadAirlines()">Réessayer</button>
+    </div>
+
+    <div *ngIf="airlines.length === 0 && !error">
+      <p>Aucune compagnie aérienne trouvée.</p>
+    </div>
+
+    <div *ngIf="airlines.length > 0">
+      <div *ngFor="let airline of airlines" class="airline-item">
+        <h2>{{ airline.name }}</h2>
+        <p>Code IATA: {{ airline.iata_code }}</p>
+      </div>
+    </div>
+
+    <div *ngIf="loading">
+      <p>Chargement...</p>
+    </div>
+  </div>
+</main>

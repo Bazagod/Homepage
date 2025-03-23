@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  apiKey: 'VOTRE_CLE_API',
+  apiKey: 'MgINN0HkQsTrL3aE38+3fA==mfkbvFf1hfiSoeAy',
 };

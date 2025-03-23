@@ -2,55 +2,49 @@ import { Component, OnInit } from '@angular/core';
 import {
   HttpClient,
   HttpErrorResponse,
-  HttpClientModule,
   HttpHeaders,
 } from '@angular/common/http';
-import { db, Airline } from '../app-db';
+import { environment } from '../../environments/environment';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-new-page',
   standalone: true,
-  imports: [CommonModule, HttpClientModule],
+  imports: [CommonModule],
   templateUrl: './new-page.component.html',
   styleUrls: ['./new-page.component.scss'],
 })
 export class NewPageComponent implements OnInit {
-  airlines: Airline[] = [];
+  exercises: any[] = [];
   error: any = null;
   loading: boolean = false;
 
   constructor(private http: HttpClient) {}
 
   ngOnInit() {
-    this.loadAirlines();
+    this.loadExercises();
   }
 
-  async loadAirlines() {
+  async loadExercises() {
     this.loading = true;
     this.error = null;
     try {
-      const storedAirlines = await db.airlines.toArray();
-      if (storedAirlines.length > 0) {
-        this.airlines = storedAirlines;
-      } else {
-        const headers = new HttpHeaders({
-          'X-Api-Key': 'MgINN0HkQsTrL3aE38+3fA==mfkbvFf1hfiSoeAy', // Remplacez par votre clé API réelle
+      const headers = new HttpHeaders({
+        'X-Api-Key': environment.apiKey,
+      });
+      this.http
+        .get<any[]>('https://api.api-ninjas.com/v1/exercises?muscle=biceps', {
+          // Modifier les paramètres de requête selon vos besoins
+          headers: headers,
+        })
+        .subscribe({
+          next: (data) => {
+            this.exercises = data;
+          },
+          error: (error: HttpErrorResponse) => {
+            this.error = error;
+          },
         });
-        this.http
-          .get<Airline[]>('https://api.api-ninjas.com/v1/airlines', {
-            headers: headers,
-          })
-          .subscribe({
-            next: async (data) => {
-              await db.airlines.bulkAdd(data);
-              this.airlines = data;
-            },
-            error: (error: HttpErrorResponse) => {
-              this.error = error;
-            },
-          });
-      }
     } catch (error) {
       console.error('Erreur lors de la récupération des données:', error);
     } finally {

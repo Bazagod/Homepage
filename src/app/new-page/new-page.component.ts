@@ -3,14 +3,15 @@ import {
   HttpClient,
   HttpErrorResponse,
   HttpClientModule,
+  HttpHeaders,
 } from '@angular/common/http';
 import { db, Airline } from '../app-db';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-new-page',
-  standalone: true, // Indique que le composant est autonome
-  imports: [CommonModule, HttpClientModule], // Importez CommonModule et HttpClientModule
+  standalone: true,
+  imports: [CommonModule, HttpClientModule],
   templateUrl: './new-page.component.html',
   styleUrls: ['./new-page.component.scss'],
 })
@@ -33,8 +34,13 @@ export class NewPageComponent implements OnInit {
       if (storedAirlines.length > 0) {
         this.airlines = storedAirlines;
       } else {
+        const headers = new HttpHeaders({
+          'X-Api-Key': 'MgINN0HkQsTrL3aE38+3fA==mfkbvFf1hfiSoeAy', // Remplacez par votre clé API réelle
+        });
         this.http
-          .get<Airline[]>('https://api.api-ninjas.com/v1/airlines')
+          .get<Airline[]>('https://api.api-ninjas.com/v1/airlines', {
+            headers: headers,
+          })
           .subscribe({
             next: async (data) => {
               await db.airlines.bulkAdd(data);
@@ -46,7 +52,7 @@ export class NewPageComponent implements OnInit {
           });
       }
     } catch (error) {
-      console.error('Erreur lors de la récupération des données :', error);
+      console.error('Erreur lors de la récupération des données:', error);
     } finally {
       this.loading = false;
     }

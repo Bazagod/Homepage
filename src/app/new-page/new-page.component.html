@@ -2,23 +2,26 @@
 
 <main>
   <div class="container">
-    <h1>New Airlines</h1>
+    <h1>Exercises</h1>
 
     <div *ngIf="error" class="error-message">
       <p>Une erreur s'est produite lors de la récupération des données.</p>
       <p>Message: {{ error.message }}</p>
       <p>Statut: {{ error.status }}</p>
-      <button (click)="loadAirlines()">Réessayer</button>
+      <button (click)="loadExercises()">Réessayer</button>
     </div>
 
-    <div *ngIf="airlines.length === 0 && !error">
-      <p>Aucune compagnie aérienne trouvée.</p>
+    <div *ngIf="exercises.length === 0 && !error">
+      <p>Aucun exercice trouvé.</p>
     </div>
 
-    <div *ngIf="airlines.length > 0">
-      <div *ngFor="let airline of airlines" class="airline-item">
-        <h2>{{ airline.name }}</h2>
-        <p>Code IATA: {{ airline.iata_code }}</p>
+    <div *ngIf="exercises.length > 0">
+      <div *ngFor="let exercise of exercises" class="exercise-item">
+        <h2>{{ exercise.name }}</h2>
+        <p>Type: {{ exercise.type }}</p>
+        <p>Muscle: {{ exercise.muscle }}</p>
+        <p>Difficulty: {{ exercise.difficulty }}</p>
+        <p>Instructions: {{ exercise.instructions }}</p>
       </div>
     </div>
 

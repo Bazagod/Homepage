@@ -19,7 +19,7 @@ import { environment } from '../environments/environment';
 export class ApiInterceptor implements HttpInterceptor {
   intercept(
     request: HttpRequest<unknown>,
-    next: HttpHandler
+    next: HttpHandler,
   ): Observable<HttpEvent<unknown>> {
     const apiRequest = request.clone({
       setHeaders: {
